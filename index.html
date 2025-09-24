@@ -3,66 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4osp3l | Offensive Security Portfolio</title>
+    <title>4osp3l | Security Research Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #00ff88;
-            --secondary: #0088ff;
-            --accent: #ff0088;
-            --dark: #0a0a0f;
-            --darker: #050508;
-            --light: #f0f0f0;
-            --glass-bg: rgba(15, 15, 25, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #f0f6fc;
+            --text-secondary: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --accent-hover: #79c0ff;
+            --border: #30363d;
+            --border-light: #21262d;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
-            color: var(--light);
-            min-height: 100vh;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Particles Background */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
-        /* Navigation */
-        nav {
+        /* Header & Navigation */
+        header {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
             position: fixed;
-            top: 0;
             width: 100%;
-            padding: 1.5rem 2rem;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            background: rgba(10, 10, 15, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 0;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: var(--text-primary);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            color: var(--accent);
         }
 
         .nav-links {
@@ -71,264 +81,273 @@
         }
 
         .nav-links a {
-            color: var(--light);
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            transition: var(--transition);
             position: relative;
         }
 
         .nav-links a:hover {
-            color: var(--primary);
+            color: var(--text-primary);
         }
 
-        .nav-links a::after {
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a.active::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -8px;
             left: 0;
-            width: 0;
+            width: 100%;
             height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
+            background-color: var(--accent);
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 8rem 0 4rem;
             text-align: center;
-            padding: 0 2rem;
-            position: relative;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
+            font-weight: 700;
             margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            background: linear-gradient(90deg, var(--text-primary), var(--accent));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: gradientShift 5s infinite alternate;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
         }
 
         .hero p {
-            font-size: 1.5rem;
-            max-width: 800px;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
         }
 
-        .cta-button {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: var(--dark);
-            text-decoration: none;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
+        .badge {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
-        /* Sections */
+        /* Section Styles */
         section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            text-align: center;
-            position: relative;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-primary);
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
         }
 
-        /* Cards */
+        /* Card Styles */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
         }
 
         .card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
             padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--glass-shadow);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .card:hover::before {
-            left: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .card h3 {
-            font-size: 1.5rem;
+        .card-header {
+            display: flex;
+            align-items: center;
             margin-bottom: 1rem;
-            color: var(--primary);
         }
 
-        .card p {
+        .card-icon {
+            background-color: var(--bg-tertiary);
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--accent);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .card-description {
+            color: var(--text-secondary);
             margin-bottom: 1.5rem;
-            opacity: 0.8;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
         }
 
         .card-link {
-            display: inline-flex;
-            align-items: center;
-            color: var(--secondary);
+            color: var(--accent);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .card-link i {
-            margin-left: 0.5rem;
-            transition: transform 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
         }
 
         .card-link:hover {
-            color: var(--primary);
+            color: var(--accent-hover);
         }
 
-        .card-link:hover i {
-            transform: translateX(5px);
+        .card-meta {
+            color: var(--text-muted);
+            font-size: 0.85rem;
         }
 
         /* Tools Section */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
 
         .tool-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
             padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--glass-shadow);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tool-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-        }
-
-        .tool-card:hover::after {
-            transform: scaleX(1);
-        }
-
-        .tool-card h3 {
+            transition: var(--transition);
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
+            flex-direction: column;
+            height: 100%;
         }
 
-        .tool-card h3 i {
-            font-size: 1.2rem;
+        .tool-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .tool-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .tool-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
         }
 
         /* Social Links */
         .social-links {
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 3rem;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
         .social-link {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            color: var(--light);
-            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            background-color: var(--bg-tertiary);
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            border: 1px solid var(--border);
         }
 
         .social-link:hover {
-            background: var(--primary);
-            color: var(--dark);
-            transform: translateY(-5px);
+            background-color: var(--accent);
+            color: var(--bg-primary);
+            border-color: var(--accent);
         }
 
         /* Footer */
         footer {
-            text-align: center;
-            padding: 2rem;
-            border-top: 1px solid var(--glass-border);
-            margin-top: 5rem;
-            background: rgba(10, 10, 15, 0.8);
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
 
         /* Animations */
@@ -347,198 +366,299 @@
             animation: fadeInUp 0.8s ease forwards;
         }
 
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
 
-        /* Responsive */
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.2rem;
-            }
-            
             .nav-links {
                 display: none;
             }
-            
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
             .card-grid, .tools-grid {
                 grid-template-columns: 1fr;
             }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+
+        /* Code-like elements */
+        .code-block {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .inline-code {
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 0.2rem 0.4rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
         }
     </style>
 </head>
 <body>
-    <!-- Particles Background -->
-    <div id="particles-js"></div>
-
-    <!-- Navigation -->
-    <nav>
-        <a href="#" class="logo">4osp3l</a>
-        <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#tools">Tools</a>
-            <a href="#writeups">Writeups</a>
-            <a href="#research">Research</a>
-            <a href="#notes">Notes</a>
-            <a href="#contact">Contact</a>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-shield-alt logo-icon"></i>
+                4osp3l
+            </a>
+            <nav class="nav-links">
+                <a href="#about" class="active">About</a>
+                <a href="#tools">Tools</a>
+                <a href="#writeups">Writeups</a>
+                <a href="#research">Research</a>
+                <a href="#notes">Notes</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1 class="fade-in">OFFENSIVE SECURITY RESEARCHER</h1>
-        <p class="fade-in delay-1">Exploring vulnerabilities, developing tools, and sharing knowledge in the cybersecurity space.</p>
-        <a href="#tools" class="cta-button fade-in delay-2">Explore My Work</a>
+        <div class="container">
+            <h1 class="fade-in">Security Research & Tool Development</h1>
+            <p class="fade-in delay-1">Exploring vulnerabilities, developing open-source security tools, and sharing knowledge through technical writeups.</p>
+            <div class="hero-badges fade-in delay-2">
+                <span class="badge">Offensive Security</span>
+                <span class="badge">Tool Development</span>
+                <span class="badge">Vulnerability Research</span>
+            </div>
+        </div>
     </section>
 
     <!-- About Section -->
     <section id="about">
-        <h2 class="section-title fade-in">About Me</h2>
-        <div class="card fade-in delay-1">
-            <p>I'm a passionate offensive security researcher focused on vulnerability discovery, tool development, and knowledge sharing. My work spans across web application security, network penetration testing, and security automation.</p>
-            <p>Through my research and tools, I aim to contribute to the cybersecurity community and help organizations strengthen their security posture.</p>
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">About</h2>
+                    <p class="section-subtitle">Security researcher focused on offensive security and tool development</p>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <p>I'm a security researcher with a focus on offensive security, vulnerability discovery, and developing tools to aid security assessments. My work spans web application security, network penetration testing, and security automation.</p>
+                <p class="code-block">
+                    # Current Focus Areas<br>
+                    - Web Application Security<br>
+                    - Automation of Security Testing<br>
+                    - Open Source Tool Development<br>
+                    - Vulnerability Research & Writeups
+                </p>
+                <p>Through my research and tools, I aim to contribute to the cybersecurity community and help organizations strengthen their security posture.</p>
+            </div>
         </div>
     </section>
 
     <!-- Tools Section -->
     <section id="tools">
-        <h2 class="section-title fade-in">My Tools</h2>
-        <div class="tools-grid">
-            <!-- Tool cards will be dynamically generated -->
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Security Tools</h2>
+                    <p class="section-subtitle">Open-source tools developed for security assessments and research</p>
+                </div>
+            </div>
+            <div class="tools-grid">
+                <!-- Tools will be dynamically generated -->
+            </div>
         </div>
     </section>
 
     <!-- Writeups Section -->
     <section id="writeups">
-        <h2 class="section-title fade-in">Writeups</h2>
-        <div class="card-grid">
-            <!-- Writeup cards will be dynamically generated -->
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Technical Writeups</h2>
+                    <p class="section-subtitle">In-depth analysis of vulnerabilities and security research</p>
+                </div>
+            </div>
+            <div class="card-grid">
+                <!-- Writeups will be dynamically generated -->
+            </div>
         </div>
     </section>
 
     <!-- Research Section -->
     <section id="research">
-        <h2 class="section-title fade-in">Research</h2>
-        <div class="card fade-in delay-1">
-            <h3>Security Research Portal</h3>
-            <p>A comprehensive portal for security research methodologies, techniques, and resources.</p>
-            <a href="https://github.com/4osp3l/Security-Research-Portal" class="card-link" target="_blank">View Repository <i class="fas fa-external-link-alt"></i></a>
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Research</h2>
+                    <p class="section-subtitle">Ongoing security research and methodologies</p>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3 class="card-title">Security Research Portal</h3>
+                </div>
+                <p class="card-description">A comprehensive portal for security research methodologies, techniques, and resources. This project serves as a knowledge base for various security testing approaches and documentation of research findings.</p>
+                <div class="card-footer">
+                    <a href="https://github.com/4osp3l/Security-Research-Portal" class="card-link" target="_blank">
+                        View Repository <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <span class="card-meta">GitHub</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Notes Section -->
     <section id="notes">
-        <h2 class="section-title fade-in">Notes</h2>
-        <div class="card fade-in delay-1">
-            <p>Collection of security notes, methodologies, and techniques gathered during research and testing.</p>
-            <p>Regularly updated with new findings and insights from various security assessments.</p>
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Notes & Methodologies</h2>
+                    <p class="section-subtitle">Collection of security testing methodologies and techniques</p>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <p>My notes include detailed methodologies for various types of security assessments, techniques for vulnerability discovery, and documentation of interesting findings from security research.</p>
+                <p class="code-block">
+                    # Common Testing Methodologies<br>
+                    - Web Application Security Testing<br>
+                    - Network Penetration Testing<br>
+                    - API Security Assessment<br>
+                    - Cloud Security Review
+                </p>
+                <p>These notes are regularly updated with new findings and insights from various security assessments and research activities.</p>
+            </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact">
-        <h2 class="section-title fade-in">Get In Touch</h2>
-        <div class="social-links">
-            <a href="https://x.com/4osp3l" class="social-link" target="_blank">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://github.com/4osp3l" class="social-link" target="_blank">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="https://medium.com/@4osp3l" class="social-link" target="_blank">
-                <i class="fab fa-medium"></i>
-            </a>
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Contact</h2>
+                    <p class="section-subtitle">Get in touch or follow my work</p>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="https://x.com/4osp3l" class="social-link" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://github.com/4osp3l" class="social-link" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://medium.com/@4osp3l" class="social-link" target="_blank">
+                    <i class="fab fa-medium"></i>
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2023 4osp3l. All rights reserved.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    &copy; 2023 4osp3l. Security Research Portfolio.
+                </div>
+                <div class="social-links">
+                    <a href="https://x.com/4osp3l" class="social-link" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://github.com/4osp3l" class="social-link" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Initialize particles.js
-        particlesJS("particles-js", {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: "#00ff88" },
-                shape: { type: "circle" },
-                opacity: { value: 0.5, random: true },
-                size: { value: 3, random: true },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#0088ff",
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: { enable: true, mode: "repulse" },
-                    onclick: { enable: true, mode: "push" },
-                    resize: true
-                }
-            }
-        });
-
         // Tools data
         const tools = [
             {
                 name: "Phone",
                 description: "A tool for phone number reconnaissance and OSINT gathering.",
-                url: "https://github.com/4osp3l/Phone"
+                url: "https://github.com/4osp3l/Phone",
+                icon: "fas fa-phone"
             },
             {
                 name: "ByDeF",
                 description: "Browser-based vulnerability discovery framework.",
-                url: "https://github.com/4osp3l/ByDeF"
+                url: "https://github.com/4osp3l/ByDeF",
+                icon: "fas fa-window-restore"
             },
             {
                 name: "RedirH4x",
                 description: "Tool for analyzing and exploiting redirect vulnerabilities.",
-                url: "https://github.com/4osp3l/RedirH4x"
+                url: "https://github.com/4osp3l/RedirH4x",
+                icon: "fas fa-exchange-alt"
             },
             {
                 name: "Secora",
                 description: "Security assessment and vulnerability scanning tool.",
-                url: "https://github.com/4osp3l/secora"
+                url: "https://github.com/4osp3l/secora",
+                icon: "fas fa-shield-alt"
             },
             {
                 name: "StegSleuth",
                 description: "Advanced steganography detection and analysis tool.",
-                url: "https://github.com/4osp3l/stegsleuth"
+                url: "https://github.com/4osp3l/stegsleuth",
+                icon: "fas fa-search"
             },
             {
                 name: "IntelliScope",
                 description: "Intelligent reconnaissance and scope management tool.",
-                url: "https://github.com/4osp3l/intelliscope"
+                url: "https://github.com/4osp3l/intelliscope",
+                icon: "fas fa-brain"
             },
             {
                 name: "40sp3l",
                 description: "Custom penetration testing framework and toolkit.",
-                url: "https://github.com/4osp3l/40sp3l"
+                url: "https://github.com/4osp3l/40sp3l",
+                icon: "fas fa-tools"
             },
             {
                 name: "jsRecon",
                 description: "JavaScript reconnaissance and analysis tool for web applications.",
-                url: "https://github.com/4osp3l/jsRecon"
+                url: "https://github.com/4osp3l/jsRecon",
+                icon: "fab fa-js-square"
             }
         ];
 
@@ -546,27 +666,27 @@
         const writeups = [
             {
                 title: "How I Test for SQL Injection in the Most Human Way Possible",
-                description: "Exploring manual SQL injection techniques and methodologies.",
+                description: "Exploring manual SQL injection techniques and methodologies that prioritize understanding over automation.",
                 url: "https://medium.com/@4osp3l/how-i-test-for-sql-injection-in-the-most-human-way-possible-a2487af33be3"
             },
             {
                 title: "Why I Started a 30-Day Bug Bounty Hunting Challenge",
-                description: "My journey into full-time bug bounty hunting through a structured challenge.",
+                description: "My journey into full-time bug bounty hunting through a structured 30-day challenge approach.",
                 url: "https://medium.com/@4osp3l/why-i-started-a-30-day-bug-bounty-hunting-challenge-before-going-full-time-20b0546a4a71"
             },
             {
                 title: "The Ultimate Guide to Starting a Career in Bug Bounty Hunting",
-                description: "Comprehensive guide for beginners in the bug bounty hunting field.",
+                description: "Comprehensive guide for absolute beginners looking to enter the bug bounty hunting field.",
                 url: "https://medium.com/@4osp3l/the-ultimate-guide-to-starting-a-career-in-website-application-bug-bounty-hunting-for-absolute-760fc66d3fca"
             },
             {
                 title: "Bypassing Business Email Restrictions Using Invite Feature Logic Flaw",
-                description: "Discovery and exploitation of a business logic vulnerability in email systems.",
+                description: "Discovery and exploitation of a business logic vulnerability in email invitation systems.",
                 url: "https://medium.com/@4osp3l/i-bypassed-business-email-restrictions-on-redacted-com-using-the-invite-feature-logic-flaw-9aaa3cbbdd88"
             },
             {
                 title: "Email Verification Flaw Allows Verification Without Owner Interaction",
-                description: "Identifying and exploiting a flaw in email verification mechanisms.",
+                description: "Identifying and exploiting a critical flaw in email verification mechanisms.",
                 url: "https://medium.com/@4osp3l/email-verification-flaw-allows-me-to-verify-any-email-id-without-the-owners-interaction-276bad0e82ff"
             }
         ];
@@ -579,9 +699,17 @@
                 const toolCard = document.createElement('div');
                 toolCard.className = 'tool-card fade-in';
                 toolCard.innerHTML = `
-                    <h3><i class="fas fa-toolbox"></i> ${tool.name}</h3>
-                    <p>${tool.description}</p>
-                    <a href="${tool.url}" class="card-link" target="_blank">View on GitHub <i class="fas fa-external-link-alt"></i></a>
+                    <div class="tool-icon">
+                        <i class="${tool.icon}"></i>
+                    </div>
+                    <h3 class="tool-title">${tool.name}</h3>
+                    <p class="tool-description">${tool.description}</p>
+                    <div class="card-footer">
+                        <a href="${tool.url}" class="card-link" target="_blank">
+                            View Repository <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <span class="card-meta">GitHub</span>
+                    </div>
                 `;
                 toolsGrid.appendChild(toolCard);
             });
@@ -595,15 +723,25 @@
                 const writeupCard = document.createElement('div');
                 writeupCard.className = 'card fade-in';
                 writeupCard.innerHTML = `
-                    <h3>${writeup.title}</h3>
-                    <p>${writeup.description}</p>
-                    <a href="${writeup.url}" class="card-link" target="_blank">Read on Medium <i class="fas fa-external-link-alt"></i></a>
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3 class="card-title">${writeup.title}</h3>
+                    </div>
+                    <p class="card-description">${writeup.description}</p>
+                    <div class="card-footer">
+                        <a href="${writeup.url}" class="card-link" target="_blank">
+                            Read on Medium <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <span class="card-meta">Technical Writeup</span>
+                    </div>
                 `;
                 writeupsGrid.appendChild(writeupCard);
             });
         }
 
-        // Intersection Observer for fade-in animations
+        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -624,7 +762,7 @@
             generateWriteupCards();
             
             // Observe elements for animation
-            document.querySelectorAll('.section-title, .card, .tool-card').forEach(el => {
+            document.querySelectorAll('.card, .tool-card').forEach(el => {
                 observer.observe(el);
             });
             
@@ -640,6 +778,14 @@
                         });
                     }
                 });
+            });
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
             });
         });
     </script>
