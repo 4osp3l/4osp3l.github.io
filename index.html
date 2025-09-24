@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>4osp3l — Offensive Security Portfolio</title>
+  <title>4osp3l</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -87,8 +87,8 @@
       <div class="brand">
         <div class="logo">4O</div>
         <div>
-          <h1>4osp3l — Offensive Security</h1>
-          <p class="lead">Tools • Writeups • Research • Notes — dark, minimal, polished</p>
+          <h1>4osp3l</h1>
+          <p class="lead">Offensive Security | Christain | Bug Bounty Hunter | Vulnerability Researcher | 0x19 | Pentester | WoT | God Is Everything</p>
         </div>
       </div>
 
@@ -96,7 +96,6 @@
         <a class="nav-link" href="#tools">Tools</a>
         <a class="nav-link" href="#writeups">Writeups</a>
         <a class="nav-link" href="#research">Research</a>
-        <a class="nav-link" href="#notes">Notes</a>
         <a class="nav-link" href="#contact">Contact</a>
       </nav>
     </header>
@@ -106,7 +105,7 @@
         <div class="card">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <div>
-              <h2 style="margin:0">Featured Tools</h2>
+              <h2 style="margin:0">Tools</h2>
               <div class="badge">Open source tools I build & maintain</div>
             </div>
             <div>
@@ -118,35 +117,18 @@
         </div>
 
         <div class="card">
-          <h3 style="margin:0 0 10px 0">Writeups</h3>
-          <ul class="writeups" id="writeups">
-          </ul>
-        </div>
-
-        <div class="card" id="research">
-          <h3 style="margin:0 0 10px 0">Research</h3>
-          <p class="badge">Selected notes & teasers from ongoing projects</p>
-          <div class="accordion" id="researchAcc">
-            <div class="acc-item">
-              <div class="acc-head"> <strong>FAsset — prioritizing functional assets</strong> <span class="badge">2025</span></div>
-              <div class="acc-body">Working on asset-first scan methodology to prioritize logins, uploaders, and admin endpoints over raw subdomains. Includes fingerprinting and prioritization heuristics.</div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <h2 style="margin:0">Writeups</h2>
             </div>
-            <div class="acc-item">
-              <div class="acc-head"> <strong>Amass + Windows tooling</strong> <span class="badge">2025</span></div>
-              <div class="acc-body">Adapting recon pipelines to run fully on Windows CLI — no WSL. Focus on reliability and automation for bug bounty reconnaissance.</div>
+            <div>
+              <input id="toolSearch" placeholder="Search tools..." style="background:transparent;border:1px solid rgba(255,255,255,0.03);padding:8px;border-radius:10px;color:#eaf2ff;font-size:13px" />
             </div>
           </div>
+
+          <div id="writeups" class="tools-grid" style="margin-top:16px"></div>
         </div>
 
-        <div class="card" id="notes">
-          <h3 style="margin:0 0 10px 0">Notes</h3>
-          <p class="badge">Quick snippets & tips</p>
-          <ul style="margin:0;padding-left:18px;color:var(--muted)">
-            <li>Always verify scope and obtain written permission before testing.</li>
-            <li>Prioritize IDOR, broken access control & sensitive info leaks.</li>
-            <li>Keep PoCs minimal and easy to reproduce for triage.</li>
-          </ul>
-        </div>
       </section>
 
       <aside class="side">
@@ -154,36 +136,23 @@
           <div style="display:flex;justify-content:space-between;align-items:center">
             <div>
               <strong>About</strong>
-              <div class="badge">Offensive security researcher & bug bounty hunter</div>
-            </div>
-            <div style="text-align:right">
-              <div style="font-weight:800">4osp3l</div>
-              <div style="font-size:12px;color:var(--muted)">Benin • Open-source builder</div>
+              <div class="badge">Offensive Security | Christain | Bug Bounty Hunter | Vulnerability Researcher | 0x19 | Pentester | WoT | God Is Everything</div>
             </div>
           </div>
         </div>
 
         <div class="card socials">
           <div class="section-title">Social</div>
-          <a href="https://x.com/4osp3l" target="_blank">📣 X (Twitter) — @4osp3l</a>
-          <a href="mailto:hello@4osp3l.example">✉️ Email — hello@4osp3l.example</a>
+          <a href="https://x.com/4osp3l" target="_blank">X (Twitter) — @4osp3l</a>
+          <a href="mailto:hello@4osp3l.example">Email — gospelchukwunonso@proton.me</a>
           <div style="margin-top:12px" class="section-title">Quick Actions</div>
           <button id="copyProfileBtn" style="width:100%;padding:10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.03);font-weight:700;cursor:pointer">Copy profile URL</button>
-        </div>
-
-        <div class="card">
-          <div class="section-title">Highlights</div>
-          <ul style="margin:0;padding-left:18px;color:var(--muted)">
-            <li>Maintainer: 9+ open source security tools</li>
-            <li>Published writeups on Medium</li>
-            <li>Focused on practical exploit chains</li>
-          </ul>
         </div>
       </aside>
     </main>
 
     <footer class="card" style="margin-top:22px">
-      <div>Built with ❤️ — <strong>4osp3l</strong> • <span class="badge">Last updated • Sep 24, 2025</span></div>
+      <div><span class="badge">Last updated • Sep 24, 2025</span></div>
     </footer>
   </div>
 
