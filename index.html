@@ -3,161 +3,645 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4osp3l - Offensive Security Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <title>4osp3l | Offensive Security Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00ff88;
+            --secondary: #0088ff;
+            --accent: #ff0088;
+            --dark: #0a0a0f;
+            --darker: #050508;
+            --light: #f0f0f0;
+            --glass-bg: rgba(15, 15, 25, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Particles Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientShift 5s infinite alternate;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--glass-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .card p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .card-link i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card-link:hover {
+            color: var(--primary);
+        }
+
+        .card-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Tools Section */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .tool-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--glass-shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .tool-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .tool-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .tool-card h3 i {
+            font-size: 1.2rem;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--light);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 5rem;
+            background: rgba(10, 10, 15, 0.8);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .card-grid, .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="loader"></div>
-    <header>
-        <div class="container">
-            <h1>4osp3l</h1>
-            <p>Offensive Security Researcher & Bug Bounty Hunter</p>
-            <nav>
-                <ul>
-                    <li><a href="#tools">Tools</a></li>
-                    <li><a href="#writeups">Writeups</a></li>
-                    <li><a href="#research">Research</a></li>
-                    <li><a href="#notes">Notes</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
 
-    <section id="hero">
-        <div class="container">
-            <h2>Unveiling the Art of Cybersecurity</h2>
-            <p>Exploring vulnerabilities, building tools, and sharing knowledge in the world of offensive security.</p>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">4osp3l</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#tools">Tools</a>
+            <a href="#writeups">Writeups</a>
+            <a href="#research">Research</a>
+            <a href="#notes">Notes</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="fade-in">OFFENSIVE SECURITY RESEARCHER</h1>
+        <p class="fade-in delay-1">Exploring vulnerabilities, developing tools, and sharing knowledge in the cybersecurity space.</p>
+        <a href="#tools" class="cta-button fade-in delay-2">Explore My Work</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title fade-in">About Me</h2>
+        <div class="card fade-in delay-1">
+            <p>I'm a passionate offensive security researcher focused on vulnerability discovery, tool development, and knowledge sharing. My work spans across web application security, network penetration testing, and security automation.</p>
+            <p>Through my research and tools, I aim to contribute to the cybersecurity community and help organizations strengthen their security posture.</p>
         </div>
     </section>
 
+    <!-- Tools Section -->
     <section id="tools">
-        <div class="container">
-            <h2>Tools</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Phone</h3>
-                    <p>Advanced reconnaissance tool for phone number analysis.</p>
-                    <a href="https://github.com/4osp3l/Phone" target="_blank">View on GitHub</a>
-                </div>
-                <div class="card">
-                    <h3>ByDeF</h3>
-                    <p>Bypass detection framework for stealthy operations.</p>
-                    <a href="https://github.com/4osp3l/ByDeF" target="_blank">View on GitHub</a>
-                </div>
-                <div class="card">
-                    <h3>RedirH4x</h3>
-                    <p>Redirection exploit toolkit for web vulnerabilities.</p>
-                    <a href="https://github.com/4osp3l/RedirH4x" target="_blank">View on GitHub</a>
-                </div>
-                <div class="card">
-                    <h3>Secora</h3>
-                    <p>Security orchestration and automation platform.</p>
-                    <a href="https://github.com/4osp3l/secora" target="_blank">View on GitHub</a>
-                </div>
-                <div class="card">
-                    <h3>Stegsleuth</h3>
-                    <p>Steganography analysis tool for hidden data extraction.</p>
-                    <a href="https://github.com/4osp3l/stegsleuth" target="_blank">View on GitHub</a>
-                </div>
-                <div class="card">
-                    <h3>Intelliscope</h3>
-                    <p>Intelligent reconnaissance tool for network scanning.</p>
-                    <a href="https://github.com/4osp3l/intelliscope" target="_blank">View on GitHub</a>
-                </div>
-                <div class="card">
-                    <h3>40sp3l</h3>
-                    <p>Core toolkit for offensive security operations.</p>
-                    <a href="https://github.com/4osp3l/40sp3l" target="_blank">View on GitHub</a>
-                </div>
-                <div class="card">
-                    <h3>Security-Research-Portal</h3>
-                    <p>Centralized portal for security research resources.</p>
-                    <a href="https://github.com/4osp3l/Security-Research-Portal" target="_blank">View on GitHub</a>
-                </div>
-                <div class="card">
-                    <h3>jsRecon</h3>
-                    <p>JavaScript-based reconnaissance tool for web apps.</p>
-                    <a href="https://github.com/4osp3l/jsRecon" target="_blank">View on GitHub</a>
-                </div>
-            </div>
+        <h2 class="section-title fade-in">My Tools</h2>
+        <div class="tools-grid">
+            <!-- Tool cards will be dynamically generated -->
         </div>
     </section>
 
+    <!-- Writeups Section -->
     <section id="writeups">
-        <div class="container">
-            <h2>Writeups</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>SQL Injection Testing</h3>
-                    <p>How I test for SQL injection in a human-centric way.</p>
-                    <a href="https://medium.com/@4osp3l/how-i-test-for-sql-injection-in-the-most-human-way-possible-a2487af33be3" target="_blank">Read on Medium</a>
-                </div>
-                <div class="card">
-                    <h3>30-Day Bug Bounty Challenge</h3>
-                    <p>Why I started a 30-day bug bounty hunting challenge.</p>
-                    <a href="https://medium.com/@4osp3l/why-i-started-a-30-day-bug-bounty-hunting-challenge-before-going-full-time-20b0546a4a71" target="_blank">Read on Medium</a>
-                </div>
-                <div class="card">
-                    <h3>Bug Bounty Career Guide</h3>
-                    <p>Ultimate guide to starting a career in bug bounty hunting.</p>
-                    <a href="https://medium.com/@4osp3l/the-ultimate-guide-to-starting-a-career-in-website-application-bug-bounty-hunting-for-absolute-760fc66d3fca" target="_blank">Read on Medium</a>
-                </div>
-                <div class="card">
-                    <h3>Business Email Bypass</h3>
-                    <p>Bypassing email restrictions using a logic flaw.</p>
-                    <a href="https://medium.com/@4osp3l/i-bypassed-business-email-restrictions-on-redacted-com-using-the-invite-feature-logic-flaw-9aaa3cbbdd88" target="_blank">Read on Medium</a>
-                </div>
-                <div class="card">
-                    <h3>Email Verification Flaw</h3>
-                    <p>Exploiting email verification without owner interaction.</p>
-                    <a href="https://medium.com/@4osp3l/email-verification-flaw-allows-me-to-verify-any-email-id-without-the-owners-interaction-276bad0e82ff" target="_blank">Read on Medium</a>
-                </div>
-            </div>
+        <h2 class="section-title fade-in">Writeups</h2>
+        <div class="card-grid">
+            <!-- Writeup cards will be dynamically generated -->
         </div>
     </section>
 
+    <!-- Research Section -->
     <section id="research">
-        <div class="container">
-            <h2>Research</h2>
-            <p>Explore my ongoing research projects and contributions to offensive security.</p>
-            <div class="card">
-                <h3>Coming Soon</h3>
-                <p>Stay tuned for detailed research papers and case studies on advanced security techniques.</p>
-            </div>
+        <h2 class="section-title fade-in">Research</h2>
+        <div class="card fade-in delay-1">
+            <h3>Security Research Portal</h3>
+            <p>A comprehensive portal for security research methodologies, techniques, and resources.</p>
+            <a href="https://github.com/4osp3l/Security-Research-Portal" class="card-link" target="_blank">View Repository <i class="fas fa-external-link-alt"></i></a>
         </div>
     </section>
 
+    <!-- Notes Section -->
     <section id="notes">
-        <div class="container">
-            <h2>Notes</h2>
-            <p>Personal notes and insights from my journey in cybersecurity.</p>
-            <div class="card">
-                <h3>Coming Soon</h3>
-                <p>Check back for tips, tricks, and lessons learned in offensive security.</p>
-            </div>
+        <h2 class="section-title fade-in">Notes</h2>
+        <div class="card fade-in delay-1">
+            <p>Collection of security notes, methodologies, and techniques gathered during research and testing.</p>
+            <p>Regularly updated with new findings and insights from various security assessments.</p>
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section id="contact">
-        <div class="container">
-            <h2>Contact</h2>
-            <p>Connect with me on social media or check out my work.</p>
-            <div class="card">
-                <h3>Social Media</h3>
-                <p>Follow me on X for updates and insights.</p>
-                <a href="https://x.com/4osp3l" target="_blank">Visit @4osp3l on X</a>
-            </div>
+        <h2 class="section-title fade-in">Get In Touch</h2>
+        <div class="social-links">
+            <a href="https://x.com/4osp3l" class="social-link" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://github.com/4osp3l" class="social-link" target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://medium.com/@4osp3l" class="social-link" target="_blank">
+                <i class="fab fa-medium"></i>
+            </a>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
-        <div class="container">
-            <p>&copy; 2025 4osp3l. All rights reserved.</p>
-        </div>
+        <p>&copy; 2023 4osp3l. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#00ff88" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#0088ff",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                }
+            }
+        });
+
+        // Tools data
+        const tools = [
+            {
+                name: "Phone",
+                description: "A tool for phone number reconnaissance and OSINT gathering.",
+                url: "https://github.com/4osp3l/Phone"
+            },
+            {
+                name: "ByDeF",
+                description: "Browser-based vulnerability discovery framework.",
+                url: "https://github.com/4osp3l/ByDeF"
+            },
+            {
+                name: "RedirH4x",
+                description: "Tool for analyzing and exploiting redirect vulnerabilities.",
+                url: "https://github.com/4osp3l/RedirH4x"
+            },
+            {
+                name: "Secora",
+                description: "Security assessment and vulnerability scanning tool.",
+                url: "https://github.com/4osp3l/secora"
+            },
+            {
+                name: "StegSleuth",
+                description: "Advanced steganography detection and analysis tool.",
+                url: "https://github.com/4osp3l/stegsleuth"
+            },
+            {
+                name: "IntelliScope",
+                description: "Intelligent reconnaissance and scope management tool.",
+                url: "https://github.com/4osp3l/intelliscope"
+            },
+            {
+                name: "40sp3l",
+                description: "Custom penetration testing framework and toolkit.",
+                url: "https://github.com/4osp3l/40sp3l"
+            },
+            {
+                name: "jsRecon",
+                description: "JavaScript reconnaissance and analysis tool for web applications.",
+                url: "https://github.com/4osp3l/jsRecon"
+            }
+        ];
+
+        // Writeups data
+        const writeups = [
+            {
+                title: "How I Test for SQL Injection in the Most Human Way Possible",
+                description: "Exploring manual SQL injection techniques and methodologies.",
+                url: "https://medium.com/@4osp3l/how-i-test-for-sql-injection-in-the-most-human-way-possible-a2487af33be3"
+            },
+            {
+                title: "Why I Started a 30-Day Bug Bounty Hunting Challenge",
+                description: "My journey into full-time bug bounty hunting through a structured challenge.",
+                url: "https://medium.com/@4osp3l/why-i-started-a-30-day-bug-bounty-hunting-challenge-before-going-full-time-20b0546a4a71"
+            },
+            {
+                title: "The Ultimate Guide to Starting a Career in Bug Bounty Hunting",
+                description: "Comprehensive guide for beginners in the bug bounty hunting field.",
+                url: "https://medium.com/@4osp3l/the-ultimate-guide-to-starting-a-career-in-website-application-bug-bounty-hunting-for-absolute-760fc66d3fca"
+            },
+            {
+                title: "Bypassing Business Email Restrictions Using Invite Feature Logic Flaw",
+                description: "Discovery and exploitation of a business logic vulnerability in email systems.",
+                url: "https://medium.com/@4osp3l/i-bypassed-business-email-restrictions-on-redacted-com-using-the-invite-feature-logic-flaw-9aaa3cbbdd88"
+            },
+            {
+                title: "Email Verification Flaw Allows Verification Without Owner Interaction",
+                description: "Identifying and exploiting a flaw in email verification mechanisms.",
+                url: "https://medium.com/@4osp3l/email-verification-flaw-allows-me-to-verify-any-email-id-without-the-owners-interaction-276bad0e82ff"
+            }
+        ];
+
+        // Function to generate tool cards
+        function generateToolCards() {
+            const toolsGrid = document.querySelector('.tools-grid');
+            
+            tools.forEach(tool => {
+                const toolCard = document.createElement('div');
+                toolCard.className = 'tool-card fade-in';
+                toolCard.innerHTML = `
+                    <h3><i class="fas fa-toolbox"></i> ${tool.name}</h3>
+                    <p>${tool.description}</p>
+                    <a href="${tool.url}" class="card-link" target="_blank">View on GitHub <i class="fas fa-external-link-alt"></i></a>
+                `;
+                toolsGrid.appendChild(toolCard);
+            });
+        }
+
+        // Function to generate writeup cards
+        function generateWriteupCards() {
+            const writeupsGrid = document.querySelector('#writeups .card-grid');
+            
+            writeups.forEach(writeup => {
+                const writeupCard = document.createElement('div');
+                writeupCard.className = 'card fade-in';
+                writeupCard.innerHTML = `
+                    <h3>${writeup.title}</h3>
+                    <p>${writeup.description}</p>
+                    <a href="${writeup.url}" class="card-link" target="_blank">Read on Medium <i class="fas fa-external-link-alt"></i></a>
+                `;
+                writeupsGrid.appendChild(writeupCard);
+            });
+        }
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            generateToolCards();
+            generateWriteupCards();
+            
+            // Observe elements for animation
+            document.querySelectorAll('.section-title, .card, .tool-card').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
